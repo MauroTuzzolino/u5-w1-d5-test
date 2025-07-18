@@ -20,6 +20,11 @@ public class PostazioneService {
         return postazioneRepository.save(postaizone);
     }
 
+    public Postazione getById(Long id) {
+        return postazioneRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Postazione non trovata"));
+    }
+
     public List<Postazione> trovaTutti() {
         return postazioneRepository.findAll();
     }
@@ -27,4 +32,5 @@ public class PostazioneService {
     public List<Postazione> cercaPerTipoECitta(TipoPostazione tipo, String citta) {
         return postazioneRepository.findByTipoAndEdificio_Citta(tipo, citta);
     }
+
 }

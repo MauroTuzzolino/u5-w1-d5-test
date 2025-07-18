@@ -4,18 +4,22 @@ import maurotuzzolino.u5_w1_d5_test.entities.Postazione;
 import maurotuzzolino.u5_w1_d5_test.entities.Prenotazione;
 import maurotuzzolino.u5_w1_d5_test.entities.Utente;
 import maurotuzzolino.u5_w1_d5_test.repositories.PrenotazioneRepository;
+import maurotuzzolino.u5_w1_d5_test.repositories.UtenteRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 public class PrenotazioneService {
 
 
     private final PrenotazioneRepository prenotazioneRepository;
+    private final UtenteRepository utenteRepository;
 
-    public PrenotazioneService(PrenotazioneRepository prenotazioneRepository) {
+    public PrenotazioneService(PrenotazioneRepository prenotazioneRepository, UtenteRepository utenteRepository) {
         this.prenotazioneRepository = prenotazioneRepository;
+        this.utenteRepository = utenteRepository;
     }
 
     public boolean postazioneDisponibile(Postazione postazione, LocalDate data) {
@@ -41,5 +45,9 @@ public class PrenotazioneService {
         prenotazione.setPostazione(postazione);
 
         return prenotazioneRepository.save(prenotazione);
+    }
+
+    public List<Prenotazione> prenotazioniPerUtente(String username) {
+        return prenotazioneRepository.findByUtenteWithPostazione(username);
     }
 }
