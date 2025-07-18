@@ -18,12 +18,12 @@ public class Utente {
     private String email;
 
     @OneToMany(mappedBy = "utente", cascade = CascadeType.ALL)
-    private List<Prenotazioni> prenotazioni;
+    private List<Prenotazione> prenotazioni;
 
     public Utente() {
     }
 
-    public Utente(String username, List<Prenotazioni> prenotazioni, String email, String nomeCompleto) {
+    public Utente(String username, List<Prenotazione> prenotazioni, String email, String nomeCompleto) {
         this.username = username;
         this.prenotazioni = prenotazioni;
         this.email = email;
@@ -62,11 +62,11 @@ public class Utente {
         this.email = email;
     }
 
-    public List<Prenotazioni> getPrenotazioni() {
+    public List<Prenotazione> getPrenotazioni() {
         return prenotazioni;
     }
 
-    public void setPrenotazioni(List<Prenotazioni> prenotazioni) {
+    public void setPrenotazioni(List<Prenotazione> prenotazioni) {
         this.prenotazioni = prenotazioni;
     }
 

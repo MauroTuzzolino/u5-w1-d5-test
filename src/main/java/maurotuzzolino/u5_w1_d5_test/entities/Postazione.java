@@ -12,6 +12,8 @@ public class Postazione {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String descrizione;
+
     @Enumerated(EnumType.STRING)
     private TipoPostazione tipo;
 
@@ -27,7 +29,8 @@ public class Postazione {
     public Postazione() {
     }
 
-    public Postazione(TipoPostazione tipo, int maxOccupanti, Edificio edificio, List<Prenotazione> prenotazioni) {
+    public Postazione(String descrizione, TipoPostazione tipo, int maxOccupanti, Edificio edificio, List<Prenotazione> prenotazioni) {
+        this.descrizione = descrizione;
         this.tipo = tipo;
         this.maxOccupanti = maxOccupanti;
         this.edificio = edificio;
@@ -74,10 +77,19 @@ public class Postazione {
         this.prenotazioni = prenotazioni;
     }
 
+    public String getDescrizione() {
+        return descrizione;
+    }
+
+    public void setDescrizione(String descrizione) {
+        this.descrizione = descrizione;
+    }
+
     @Override
     public String toString() {
         return "Postazione{" +
                 "id=" + id +
+                ", descrizione='" + descrizione + '\'' +
                 ", tipo=" + tipo +
                 ", maxOccupanti=" + maxOccupanti +
                 ", edificio=" + edificio +
