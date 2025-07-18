@@ -1,6 +1,7 @@
 package maurotuzzolino.u5_w1_d5_test.services;
 
 import maurotuzzolino.u5_w1_d5_test.entities.Utente;
+import maurotuzzolino.u5_w1_d5_test.exceptions.UtenteNonTrovatoException;
 import maurotuzzolino.u5_w1_d5_test.repositories.UtenteRepository;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,7 @@ public class UtenteService {
     }
 
     public Optional<Utente> trovaPerUsername(String username) {
-        return utenteRepository.findByUsername(username);
+        return Optional.ofNullable(utenteRepository.findByUsername(username)
+                .orElseThrow(() -> new UtenteNonTrovatoException(username)));
     }
 }

@@ -63,7 +63,7 @@ public class RunnerApplicativo implements CommandLineRunner {
         Optional<Utente> optUtente = utenteService.trovaPerUsername(username);
         if (optUtente.isPresent()) {
             utenteLoggato = optUtente.get();
-            System.out.println("Benvenuto, " + utenteLoggato.getNomeCompleto());
+            System.out.println("Benvenuto/a, " + utenteLoggato.getNomeCompleto());
         } else {
             System.out.println("Utente non trovato. Uscita...");
             System.exit(0);
@@ -84,7 +84,7 @@ public class RunnerApplicativo implements CommandLineRunner {
         System.out.print("Inserisci tipo postazione (PRIVATO, OPENSPACE, SALA_RIUNIONI): ");
         TipoPostazione tipo = TipoPostazione.valueOf(scanner.nextLine().toUpperCase());
 
-        System.out.print("Inserisci città: ");
+        System.out.print("Inserisci città (iniziale maiuscola richiesta): ");
         String citta = scanner.nextLine();
 
         List<Postazione> risultati = postazioneService.cercaPerTipoECitta(tipo, citta);

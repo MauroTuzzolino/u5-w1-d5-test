@@ -2,6 +2,7 @@ package maurotuzzolino.u5_w1_d5_test.services;
 
 import maurotuzzolino.u5_w1_d5_test.entities.Postazione;
 import maurotuzzolino.u5_w1_d5_test.enums.TipoPostazione;
+import maurotuzzolino.u5_w1_d5_test.exceptions.PostazioneNonTrovataException;
 import maurotuzzolino.u5_w1_d5_test.repositories.PostazioneRepository;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +23,7 @@ public class PostazioneService {
 
     public Postazione getById(Long id) {
         return postazioneRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Postazione non trovata"));
+                .orElseThrow(() -> new PostazioneNonTrovataException(id));
     }
 
     public List<Postazione> trovaTutti() {

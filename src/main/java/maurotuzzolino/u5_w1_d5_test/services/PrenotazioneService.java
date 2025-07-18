@@ -3,6 +3,8 @@ package maurotuzzolino.u5_w1_d5_test.services;
 import maurotuzzolino.u5_w1_d5_test.entities.Postazione;
 import maurotuzzolino.u5_w1_d5_test.entities.Prenotazione;
 import maurotuzzolino.u5_w1_d5_test.entities.Utente;
+import maurotuzzolino.u5_w1_d5_test.exceptions.PostazioneNonDisponibileException;
+import maurotuzzolino.u5_w1_d5_test.exceptions.UtenteHaGiaPrenotatoException;
 import maurotuzzolino.u5_w1_d5_test.repositories.PrenotazioneRepository;
 import maurotuzzolino.u5_w1_d5_test.repositories.UtenteRepository;
 import org.springframework.stereotype.Service;
@@ -32,11 +34,11 @@ public class PrenotazioneService {
 
     public Prenotazione prenota(Postazione postazione, Utente utente, LocalDate data) {
         if (!postazioneDisponibile(postazione, data)) {
-            throw new RuntimeException("Postazione già prenotata per il giorno " + data);
+            throw new PostazioneNonDisponibileException(postazione.getId(), data);
         }
 
         if (utenteHaGiaPrenotatoQuelGiorno(utente, data)) {
-            throw new RuntimeException("Utente ha già una prenotazione per il giorno " + data);
+            throw new UtenteHaGiaPrenotatoException(utente.getUsername(), data);
         }
 
         Prenotazione prenotazione = new Prenotazione();
